@@ -2938,7 +2938,7 @@ async function resetContest() {
         confirm(
             "ТОЧНО очистить весь конкурс?\n\n" +
             "Будут удалены все участники и все голоса, " +
-            "а голосование будет сброшено."
+            "а голосование будет полностью сброшено."
         );
 
     if (!confirmed) {
@@ -2947,83 +2947,39 @@ async function resetContest() {
 
     try {
 
-        /*
-            Удаляем голоса.
-        */
         const {
-            error: votesError
+            error
         } = await supabaseClient
-            .from("votes")
-            .delete()
-            .not("id", "is", null);
+            .rpc("reset_contest");
 
-        if (votesError) {
-            throw new Error(
-                "votes: " +
-                formatSupabaseError(votesError)
+        if (error) {
+
+            console.error(
+                "RESET CONTEST ERROR:",
+                error
             );
+
+            showVoteError(
+                "Ошибка очистки БД: " +
+                formatSupabaseError(error)
+            );
+
+            return;
         }
 
         /*
-            Удаляем голоса за Егора.
+            Полностью перечитываем данные из Supabase,
+            а не полагаемся на локальный массив.
         */
-        const {
-            error: egorError
-        } = await supabaseClient
-            .from("egor_votes")
-            .delete()
-            .not("id", "is", null);
-
-        if (egorError) {
-            throw new Error(
-                "egor_votes: " +
-                formatSupabaseError(egorError)
-            );
-        }
-
-        /*
-            Удаляем участников.
-        */
-        const {
-            error: participantsError
-        } = await supabaseClient
-            .from("participants")
-            .delete()
-            .not("id", "is", null);
-
-        if (participantsError) {
-            throw new Error(
-                "participants: " +
-                formatSupabaseError(participantsError)
-            );
-        }
-
-        /*
-            Сбрасываем состояние конкурса.
-        */
-        const {
-            error: settingsError
-        } = await supabaseClient
-            .from("contest_settings")
-            .update({
-                voting_started: false,
-                voting_completed: false
-            })
-            .eq("id", 1);
-
-        if (settingsError) {
-            throw new Error(
-                "contest_settings: " +
-                formatSupabaseError(settingsError)
-            );
-        }
-
         participants = [];
         votingStarted = false;
         votingCompleted = false;
         selectedVotes = {};
         selectedEgor = null;
         registrationOpen = false;
+
+        await loadParticipants();
+        await loadSettings();
 
         document
             .getElementById("registrationSection")
@@ -3037,13 +2993,11 @@ async function resetContest() {
             .getElementById("resultsSection")
             .style.display = "none";
 
+        renderAdmin();
+
         showToast(
             "Конкурс полностью сброшен."
         );
-
-        await loadParticipants();
-
-        renderAdmin();
 
     } catch (error) {
 
@@ -3057,86 +3011,6 @@ async function resetContest() {
             formatSupabaseError(error)
         );
     }
-}
-
-
-async function startVoting() {
-
-    if (
-        participants.filter(
-            p =>
-                !p.excluded
-        ).length < 3
-    ) {
-
-        showToast(
-            "Нужно минимум 3 участника."
-        );
-
-        return;
-    }
-
-
-    if (
-        !confirm(
-            "Начать голосование?"
-        )
-    ) {
-        return;
-    }
-
-
-    const {
-        error
-    } = await supabaseClient
-
-        .from(
-            "contest_settings"
-        )
-
-        .update({
-
-            voting_started:
-                true,
-
-            voting_completed:
-                false
-
-        })
-
-        .eq(
-            "id",
-            1
-        );
-
-
-    if (error) {
-
-        console.error(error);
-
-        showToast(
-            "Не удалось начать голосование."
-        );
-
-        return;
-    }
-
-
-    votingStarted =
-        true;
-
-    votingCompleted =
-        false;
-
-
-    showToast(
-        "Голосование началось! 🚀"
-    );
-
-
-    await loadSettings();
-
-    renderAdmin();
 }
 
 
@@ -3231,10 +3105,21 @@ async function finishVoting() {
     votingCompleted = true;
     registrationOpen = false;
 
+    /*
+        Повторно читаем состояние из Supabase.
+        Это защищает от рассинхронизации между
+        локальным состоянием и БД.
+    */
+    await loadSettings();
+
+    votingStarted = false;
+    votingCompleted = true;
+    registrationOpen = false;
+
 
     /*
-        Показываем результаты сразу, не полагаясь
-        на повторную загрузку settings.
+        Показываем результаты только после
+        подтверждения voting_completed = true.
     */
     const resultsSection =
         document.getElementById(
@@ -4067,12 +3952,23 @@ async function renderResults() {
 
         console.error(error);
 
+        const resultsSection =
+            document.getElementById("resultsSection");
+
+        if (resultsSection) {
+            resultsSection.style.display = "block";
+        }
+
         podium.innerHTML = `
             <div
                 class="empty"
                 style="grid-column:1/-1"
             >
                 Не удалось загрузить результаты.
+                <br>
+                <small>${escapeHTML(
+                    formatSupabaseError(error)
+                )}</small>
             </div>
         `;
 
