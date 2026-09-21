@@ -1640,7 +1640,7 @@
                     id="egorPercent"
                     class="egor-percent"
                 >
-                    0%
+                    Нет голосов
                 </div>
 
                 <p style="color:var(--muted)">
@@ -1806,13 +1806,6 @@ const SUPABASE_URL =
 
 const SUPABASE_KEY =
     "sb_publishable_PxIVdZZV8POwGl5RUFvrFg_96FfhktI";
-
-
-/*
-    Storage bucket for cosplay photos.
-*/
-const PHOTO_BUCKET =
-    "cosplay";
 
 
 const supabaseClient =
@@ -2052,94 +2045,52 @@ async function loadSettings() {
 
 function updateSiteState() {
 
+    const registrationSection =
+        document.getElementById("registrationSection");
+
+    const votingSection =
+        document.getElementById("votingSection");
+
+    const resultsSection =
+        document.getElementById("resultsSection");
 
     /*
-        Голосование завершено
+        Результаты доступны ТОЛЬКО после
+        явного завершения голосования админом.
     */
+    if (votingCompleted === true) {
 
-    if (votingCompleted) {
-
-        document
-            .getElementById(
-                "registrationSection"
-            )
-            .style.display =
-                "none";
-
-        document
-            .getElementById(
-                "votingSection"
-            )
-            .style.display =
-                "none";
-
-        document
-            .getElementById(
-                "resultsSection"
-            )
-            .style.display =
-                "block";
-
+        registrationSection.style.display = "none";
+        votingSection.style.display = "none";
+        resultsSection.style.display = "block";
 
         renderResults();
-
         return;
     }
 
-
     /*
-        Голосование идёт
+        Голосование идёт.
+        Результаты полностью скрыты.
     */
+    if (votingStarted === true) {
 
-    if (votingStarted) {
-
-        document
-            .getElementById(
-                "registrationSection"
-            )
-            .style.display =
-                "none";
-
-        document
-            .getElementById(
-                "votingSection"
-            )
-            .style.display =
-                "block";
-
+        registrationSection.style.display = "none";
+        votingSection.style.display = "block";
+        resultsSection.style.display = "none";
 
         renderVoting();
-
         return;
     }
 
-
     /*
-        Регистрация
+        Регистрация открыта.
+        Результаты скрыты даже если в БД
+        случайно остались старые голоса.
     */
-
-    document
-        .getElementById(
-            "registrationSection"
-        )
-        .style.display =
-            "block";
-
-    document
-        .getElementById(
-            "votingSection"
-        )
-        .style.display =
-            "none";
-
-    document
-        .getElementById(
-            "resultsSection"
-        )
-        .style.display =
-            "none";
+    registrationSection.style.display = "block";
+    votingSection.style.display = "none";
+    resultsSection.style.display = "none";
 }
-
 
 /* =====================================================
                     PHOTO PREVIEW
@@ -2207,33 +2158,68 @@ async function registerParticipant(event) {
 
     event.preventDefault();
 
-    if (votingStarted || votingCompleted) {
-        showToast("Регистрация закрыта.");
+
+    if (
+        votingStarted ||
+        votingCompleted
+    ) {
+
+        showToast(
+            "Регистрация закрыта."
+        );
+
         return;
     }
+
 
     const firstName =
-        document.getElementById("firstName").value.trim();
+        document
+            .getElementById(
+                "firstName"
+            )
+            .value
+            .trim();
+
 
     const lastName =
-        document.getElementById("lastName").value.trim();
+        document
+            .getElementById(
+                "lastName"
+            )
+            .value
+            .trim();
+
 
     const character =
-        document.getElementById("character").value.trim();
+        document
+            .getElementById(
+                "character"
+            )
+            .value
+            .trim();
+
 
     const file =
-        document.getElementById("photo").files[0];
+        document
+            .getElementById(
+                "photo"
+            )
+            .files[0];
 
-    if (!firstName || !lastName || !character) {
-        showToast("Заполни все поля.");
-        return;
-    }
 
     if (!file) {
-        showToast("Загрузи фотографию.");
+
+        showToast(
+            "Загрузи фотографию."
+        );
+
         return;
     }
 
+
+    /*
+        Разрешаем только JPG / PNG / WEBP.
+    */
     const allowedTypes = [
         "image/jpeg",
         "image/png",
@@ -2241,111 +2227,181 @@ async function registerParticipant(event) {
     ];
 
     if (!allowedTypes.includes(file.type)) {
-        showToast("Можно загрузить только JPG, PNG или WEBP.");
+        showToast(
+            "Можно загрузить только JPG, PNG или WEBP."
+        );
         return;
     }
 
-    if (file.size > 6 * 1024 * 1024) {
-        showToast("Фото должно быть меньше 6 МБ.");
-        return;
-    }
+    /*
+        Ограничение размера.
+    */
 
-    showToast("Загружаем фотографию...");
-
-    try {
-        const extension =
-            file.name.split(".").pop().toLowerCase();
-
-        const filePath =
-            `${crypto.randomUUID()}.${extension}`;
-
-        console.log("Uploading photo:", {
-            bucket: PHOTO_BUCKET,
-            filePath,
-            type: file.type,
-            size: file.size
-        });
-
-        const { error: uploadError } =
-            await supabaseClient
-                .storage
-                .from(PHOTO_BUCKET)
-                .upload(
-                    filePath,
-                    file,
-                    {
-                        cacheControl: "3600",
-                        contentType: file.type,
-                        upsert: false
-                    }
-                );
-
-        if (uploadError) {
-            console.error("Supabase Storage upload error:", uploadError);
-            throw new Error(
-                `Не удалось загрузить фото: ${uploadError.message}`
-            );
-        }
-
-        const { data: publicData } =
-            supabaseClient
-                .storage
-                .from(PHOTO_BUCKET)
-                .getPublicUrl(filePath);
-
-        const photoUrl =
-            publicData?.publicUrl;
-
-        if (!photoUrl) {
-            throw new Error(
-                "Supabase не вернул публичную ссылку на фотографию."
-            );
-        }
-
-        const { error: insertError } =
-            await supabaseClient
-                .from("participants")
-                .insert({
-                    first_name: firstName,
-                    last_name: lastName,
-                    character_name: character,
-                    photo_url: photoUrl
-                });
-
-        if (insertError) {
-            console.error("Supabase participants insert error:", insertError);
-
-            // If the DB insert fails after a successful upload, remove the orphaned photo.
-            await supabaseClient
-                .storage
-                .from(PHOTO_BUCKET)
-                .remove([filePath]);
-
-            throw new Error(
-                `Фото загрузилось, но регистрация не сохранилась: ${insertError.message}`
-            );
-        }
-
-        document
-            .getElementById("registrationForm")
-            .reset();
-
-        document
-            .getElementById("preview")
-            .style.display = "none";
-
-        showToast("Ты зарегистрирован! 🎉");
-
-        await loadParticipants();
-
-    } catch (error) {
-        console.error("Registration error:", error);
+    if (
+        file.size >
+        6 * 1024 * 1024
+    ){
 
         showToast(
-            error?.message ||
-            "Не удалось зарегистрироваться. Открой консоль браузера для подробностей."
+            "Фото должно быть меньше 6 МБ."
         );
+
+        return;
     }
+
+
+    showToast(
+        "Загружаем фотографию..."
+    );
+
+
+    /*
+        Уникальное имя файла.
+    */
+
+    const extension =
+        file.name
+            .split(".")
+            .pop()
+            .toLowerCase();
+
+
+    const filePath =
+        `${crypto.randomUUID()}.${extension}`;
+
+
+    /*
+        Upload в Supabase Storage.
+    */
+
+    const {
+        error:
+            uploadError
+    } = await supabaseClient
+
+        .storage
+
+        .from(PHOTO_BUCKET)
+
+        .upload(
+            filePath,
+            file,
+            {
+                cacheControl:
+                    "3600",
+
+                contentType:
+                    file.type,
+
+                upsert:
+                    false
+            }
+        );
+
+
+    if (uploadError) {
+
+        console.error(
+            uploadError
+        );
+
+        showToast(
+            "Ошибка загрузки: " +
+            (uploadError.message || "проверь Storage policy.")
+        );
+
+        return;
+    }
+
+
+    /*
+        Получаем публичную ссылку.
+    */
+
+    const {
+        data:
+            publicData
+    } =
+        supabaseClient
+
+            .storage
+
+            .from(PHOTO_BUCKET)
+
+            .getPublicUrl(
+                filePath
+            );
+
+
+    const photoUrl =
+        publicData.publicUrl;
+
+
+    /*
+        Создаём участника.
+    */
+
+    const {
+        error:
+            insertError
+    } = await supabaseClient
+
+        .from(
+            "participants"
+        )
+
+        .insert({
+
+            first_name:
+                firstName,
+
+            last_name:
+                lastName,
+
+            character_name:
+                character,
+
+            photo_url:
+                photoUrl
+
+        });
+
+
+    if (insertError) {
+
+        console.error(
+            insertError
+        );
+
+        showToast(
+            "Ошибка регистрации."
+        );
+
+        return;
+    }
+
+
+    document
+        .getElementById(
+            "registrationForm"
+        )
+        .reset();
+
+
+    document
+        .getElementById(
+            "preview"
+        )
+        .style.display =
+            "none";
+
+
+    showToast(
+        "Ты зарегистрирован! 🎉"
+    );
+
+
+    await loadParticipants();
 }
 
 
@@ -3591,168 +3647,156 @@ async function submitVoting() {
 
 async function renderResults() {
 
+    const podium =
+        document.getElementById("podium");
+
+    const egorPercent =
+        document.getElementById("egorPercent");
+
+    /*
+        Дополнительная защита:
+        результаты нельзя вызвать напрямую,
+        пока админ не завершил голосование.
+    */
+    if (!votingCompleted) {
+
+        document.getElementById(
+            "resultsSection"
+        ).style.display = "none";
+
+        return;
+    }
+
+    /*
+        Загружаем только реальные голоса.
+    */
     const {
-        data:
-            voteRows,
+        data: voteRows,
         error
     } = await supabaseClient
-
         .from("votes")
-
-        .select(
-            "participant_id, points"
-        );
-
+        .select("participant_id, points");
 
     if (error) {
 
         console.error(error);
 
-        return;
-    }
-
-
-    const scores = {};
-
-
-    (voteRows || [])
-        .forEach(
-            vote => {
-
-                if (
-                    !scores[
-                        vote.participant_id
-                    ]
-                ) {
-
-                    scores[
-                        vote.participant_id
-                    ] = 0;
-                }
-
-
-                scores[
-                    vote.participant_id
-                ] += vote.points;
-            }
-        );
-
-
-    const ranked =
-        participants
-
-            .filter(
-                p =>
-                    !p.excluded
-            )
-
-            .map(
-                p => ({
-
-                    ...p,
-
-                    score:
-                        scores[p.id] ||
-                        0
-
-                })
-            )
-
-            .sort(
-                (a,b) =>
-                    b.score -
-                    a.score
-            );
-
-
-    const top =
-        ranked.slice(
-            0,
-            3
-        );
-
-
-    const podium =
-        document
-            .getElementById(
-                "podium"
-            );
-
-
-    if (!top.length) {
-
         podium.innerHTML = `
-
             <div
                 class="empty"
                 style="grid-column:1/-1"
             >
-                Пока нет голосов.
+                Не удалось загрузить результаты.
             </div>
+        `;
 
+        return;
+    }
+
+    /*
+        Если голосов вообще нет —
+        не создаём фальшивый рейтинг
+        из участников с 0 баллов.
+    */
+    if (!voteRows || voteRows.length === 0) {
+
+        podium.innerHTML = `
+            <div
+                class="empty"
+                style="grid-column:1/-1"
+            >
+                Пока нет ни одного голоса.
+            </div>
         `;
 
     } else {
 
+        const scores = {};
 
-        const ordered = [
+        voteRows.forEach(vote => {
 
-            top[1],
+            if (!scores[vote.participant_id]) {
+                scores[vote.participant_id] = 0;
+            }
 
-            top[0],
+            scores[vote.participant_id] +=
+                Number(vote.points) || 0;
+        });
 
-            top[2]
+        /*
+            В рейтинг попадают только участники,
+            которые реально получили хотя бы 1 балл.
+        */
+        const ranked =
+            participants
+                .filter(p => !p.excluded)
+                .filter(p => scores[p.id] > 0)
+                .map(p => ({
+                    ...p,
+                    score: scores[p.id]
+                }))
+                .sort((a, b) => b.score - a.score);
 
-        ].filter(Boolean);
+        const top = ranked.slice(0, 3);
 
+        if (!top.length) {
 
-        podium.innerHTML =
-            ordered
-                .map(
-                    p => {
+            podium.innerHTML = `
+                <div
+                    class="empty"
+                    style="grid-column:1/-1"
+                >
+                    Пока нет ни одного голоса.
+                </div>
+            `;
+
+        } else {
+
+            const ordered = [
+                top[1],
+                top[0],
+                top[2]
+            ].filter(Boolean);
+
+            podium.innerHTML =
+                ordered
+                    .map(p => {
 
                         const place =
-                            p.id ===
-                            top[0]?.id
+                            p.id === top[0]?.id
                                 ? 1
-                                : p.id ===
-                                  top[1]?.id
+                                : p.id === top[1]?.id
                                     ? 2
                                     : 3;
 
-
                         return `
-
                             <div
                                 class="
                                     place
                                     ${
                                         place === 1
-                                        ? "first"
-                                        : ""
+                                            ? "first"
+                                            : ""
                                     }
                                 "
                             >
-
                                 <div
                                     class="place-medal"
                                 >
                                     ${
                                         place === 1
-                                        ? "🥇"
-                                        : place === 2
-                                            ? "🥈"
-                                            : "🥉"
+                                            ? "🥇"
+                                            : place === 2
+                                                ? "🥈"
+                                                : "🥉"
                                     }
                                 </div>
-
 
                                 <img
                                     src="${escapeHTML(
                                         p.photo_url
                                     )}"
                                 >
-
 
                                 <div
                                     class="place-name"
@@ -3765,73 +3809,67 @@ async function renderResults() {
                                     )}
                                 </div>
 
-
                                 <div
                                     class="place-score"
                                 >
                                     ${p.score}
                                     баллов
                                 </div>
-
                             </div>
-
                         `;
-
-                    }
-                )
-                .join("");
+                    })
+                    .join("");
+        }
     }
 
-
     /*
-        EGOR
+        ЕГОР
+
+        Если ответов нет вообще —
+        не показываем 0%, а честно говорим,
+        что голосов пока нет.
     */
-
     const {
-        data:
-            egorRows
+        data: egorRows,
+        error: egorError
     } = await supabaseClient
-
-        .from(
-            "egor_votes"
-        )
-
+        .from("egor_votes")
         .select("yes");
 
+    if (egorError) {
+
+        console.error(egorError);
+
+        egorPercent.textContent =
+            "Нет данных";
+
+        return;
+    }
 
     const total =
-        egorRows?.length ||
-        0;
+        egorRows?.length || 0;
 
+    if (total === 0) {
+
+        egorPercent.textContent =
+            "Нет голосов";
+
+        return;
+    }
 
     const yes =
-        egorRows
-            ?.filter(
-                row =>
-                    row.yes
-            )
-            .length ||
-        0;
-
+        egorRows.filter(
+            row => row.yes === true
+        ).length;
 
     const percent =
-        total === 0
-            ? 0
-            : Math.round(
-                yes /
-                total *
-                100
-            );
+        Math.round(
+            yes / total * 100
+        );
 
-
-    document
-        .getElementById(
-            "egorPercent"
-        )
-        .textContent =
-            `${percent}%`;
+    egorPercent.textContent =
+        `${percent}%`;
 }
-
 
 /* =====================================================
                     REALTIME
