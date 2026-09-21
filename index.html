@@ -3005,11 +3005,11 @@ async function resetContest() {
             error: settingsError
         } = await supabaseClient
             .from("contest_settings")
-            .upsert({
-                id: 1,
+            .update({
                 voting_started: false,
                 voting_completed: false
-            });
+            })
+            .eq("id", 1);
 
         if (settingsError) {
             throw new Error(
@@ -3043,7 +3043,7 @@ async function resetContest() {
 
         await loadParticipants();
 
-        updateAdminUI();
+        renderAdmin();
 
     } catch (error) {
 
