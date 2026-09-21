@@ -1808,6 +1808,13 @@ const SUPABASE_KEY =
     "sb_publishable_PxIVdZZV8POwGl5RUFvrFg_96FfhktI";
 
 
+/*
+    Storage bucket for cosplay photos.
+*/
+const PHOTO_BUCKET =
+    "cosplay";
+
+
 const supabaseClient =
     window.supabase.createClient(
         SUPABASE_URL,
@@ -2200,233 +2207,145 @@ async function registerParticipant(event) {
 
     event.preventDefault();
 
-
-    if (
-        votingStarted ||
-        votingCompleted
-    ) {
-
-        showToast(
-            "Регистрация закрыта."
-        );
-
+    if (votingStarted || votingCompleted) {
+        showToast("Регистрация закрыта.");
         return;
     }
-
 
     const firstName =
-        document
-            .getElementById(
-                "firstName"
-            )
-            .value
-            .trim();
-
+        document.getElementById("firstName").value.trim();
 
     const lastName =
-        document
-            .getElementById(
-                "lastName"
-            )
-            .value
-            .trim();
-
+        document.getElementById("lastName").value.trim();
 
     const character =
-        document
-            .getElementById(
-                "character"
-            )
-            .value
-            .trim();
-
+        document.getElementById("character").value.trim();
 
     const file =
-        document
-            .getElementById(
-                "photo"
-            )
-            .files[0];
+        document.getElementById("photo").files[0];
 
+    if (!firstName || !lastName || !character) {
+        showToast("Заполни все поля.");
+        return;
+    }
 
     if (!file) {
-
-        showToast(
-            "Загрузи фотографию."
-        );
-
+        showToast("Загрузи фотографию.");
         return;
     }
 
+    const allowedTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+    ];
 
-    /*
-        Ограничение размера.
-    */
-
-    if (
-        file.size >
-        6 * 1024 * 1024
-    ) {
-
-        showToast(
-            "Фото должно быть меньше 6 МБ."
-        );
-
+    if (!allowedTypes.includes(file.type)) {
+        showToast("Можно загрузить только JPG, PNG или WEBP.");
         return;
     }
 
+    if (file.size > 6 * 1024 * 1024) {
+        showToast("Фото должно быть меньше 6 МБ.");
+        return;
+    }
 
-    showToast(
-        "Загружаем фотографию..."
-    );
+    showToast("Загружаем фотографию...");
 
+    try {
+        const extension =
+            file.name.split(".").pop().toLowerCase();
 
-    /*
-        Уникальное имя файла.
-    */
+        const filePath =
+            `${crypto.randomUUID()}.${extension}`;
 
-    const extension =
-        file.name
-            .split(".")
-            .pop()
-            .toLowerCase();
-
-
-    const filePath =
-        `${crypto.randomUUID()}.${extension}`;
-
-
-    /*
-        Upload в Supabase Storage.
-    */
-
-    const {
-        error:
-            uploadError
-    } = await supabaseClient
-
-        .storage
-
-        .from(PHOTO_BUCKET)
-
-        .upload(
+        console.log("Uploading photo:", {
+            bucket: PHOTO_BUCKET,
             filePath,
-            file,
-            {
-                cacheControl:
-                    "3600",
-
-                contentType:
-                    file.type,
-
-                upsert:
-                    false
-            }
-        );
-
-
-    if (uploadError) {
-
-        console.error(
-            uploadError
-        );
-
-        showToast(
-            "Ошибка загрузки фотографии."
-        );
-
-        return;
-    }
-
-
-    /*
-        Получаем публичную ссылку.
-    */
-
-    const {
-        data:
-            publicData
-    } =
-        supabaseClient
-
-            .storage
-
-            .from(PHOTO_BUCKET)
-
-            .getPublicUrl(
-                filePath
-            );
-
-
-    const photoUrl =
-        publicData.publicUrl;
-
-
-    /*
-        Создаём участника.
-    */
-
-    const {
-        error:
-            insertError
-    } = await supabaseClient
-
-        .from(
-            "participants"
-        )
-
-        .insert({
-
-            first_name:
-                firstName,
-
-            last_name:
-                lastName,
-
-            character_name:
-                character,
-
-            photo_url:
-                photoUrl
-
+            type: file.type,
+            size: file.size
         });
 
+        const { error: uploadError } =
+            await supabaseClient
+                .storage
+                .from(PHOTO_BUCKET)
+                .upload(
+                    filePath,
+                    file,
+                    {
+                        cacheControl: "3600",
+                        contentType: file.type,
+                        upsert: false
+                    }
+                );
 
-    if (insertError) {
+        if (uploadError) {
+            console.error("Supabase Storage upload error:", uploadError);
+            throw new Error(
+                `Не удалось загрузить фото: ${uploadError.message}`
+            );
+        }
 
-        console.error(
-            insertError
-        );
+        const { data: publicData } =
+            supabaseClient
+                .storage
+                .from(PHOTO_BUCKET)
+                .getPublicUrl(filePath);
+
+        const photoUrl =
+            publicData?.publicUrl;
+
+        if (!photoUrl) {
+            throw new Error(
+                "Supabase не вернул публичную ссылку на фотографию."
+            );
+        }
+
+        const { error: insertError } =
+            await supabaseClient
+                .from("participants")
+                .insert({
+                    first_name: firstName,
+                    last_name: lastName,
+                    character_name: character,
+                    photo_url: photoUrl
+                });
+
+        if (insertError) {
+            console.error("Supabase participants insert error:", insertError);
+
+            // If the DB insert fails after a successful upload, remove the orphaned photo.
+            await supabaseClient
+                .storage
+                .from(PHOTO_BUCKET)
+                .remove([filePath]);
+
+            throw new Error(
+                `Фото загрузилось, но регистрация не сохранилась: ${insertError.message}`
+            );
+        }
+
+        document
+            .getElementById("registrationForm")
+            .reset();
+
+        document
+            .getElementById("preview")
+            .style.display = "none";
+
+        showToast("Ты зарегистрирован! 🎉");
+
+        await loadParticipants();
+
+    } catch (error) {
+        console.error("Registration error:", error);
 
         showToast(
-            "Ошибка регистрации."
+            error?.message ||
+            "Не удалось зарегистрироваться. Открой консоль браузера для подробностей."
         );
-
-        return;
     }
-
-
-    document
-        .getElementById(
-            "registrationForm"
-        )
-        .reset();
-
-
-    document
-        .getElementById(
-            "preview"
-        )
-        .style.display =
-            "none";
-
-
-    showToast(
-        "Ты зарегистрирован! 🎉"
-    );
-
-
-    await loadParticipants();
 }
 
 
