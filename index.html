@@ -1085,6 +1085,14 @@
         min-width: 0;
         margin-top: 12px;
         font-size: 13px;
+        overflow: hidden;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        max-width: 100%;
     }
 
     .preview {
@@ -1488,7 +1496,7 @@
                                 <input
                                     type="file"
                                     id="photo"
-                                    accept="image/*"
+                                    accept="image/jpeg,image/png,image/webp"
                                     required
                                 >
 
@@ -2299,7 +2307,7 @@ async function registerParticipant(event) {
 
         .storage
 
-        .from("cosplay")
+        .from(PHOTO_BUCKET)
 
         .upload(
             filePath,
@@ -2343,7 +2351,7 @@ async function registerParticipant(event) {
 
             .storage
 
-            .from("cosplay")
+            .from(PHOTO_BUCKET)
 
             .getPublicUrl(
                 filePath
