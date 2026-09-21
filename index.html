@@ -1406,6 +1406,7 @@
 
     <section
         id="registrationSection"
+        style="display:none"
     >
 
         <div class="container">
@@ -1512,7 +1513,22 @@
                     </div>
 
 
-                    <div class="form-actions">
+                    <div
+                        class="form-actions"
+                        style="
+                            justify-content:space-between;
+                            gap:10px;
+                            flex-wrap:wrap;
+                        "
+                    >
+
+                        <button
+                            class="btn btn-secondary"
+                            type="button"
+                            onclick="closeRegistrationForm()"
+                        >
+                            Закрыть
+                        </button>
 
                         <button
                             class="btn btn-primary"
@@ -1839,6 +1855,12 @@ let selectedEgor = null;
 
 let isAdmin = false;
 
+/*
+    Форма регистрации открывается только
+    после нажатия кнопки «Участвовать».
+*/
+let registrationOpen = false;
+
 
 /*
     У каждого браузера будет
@@ -1937,14 +1959,34 @@ function escapeHTML(value) {
 
 function scrollToRegistration() {
 
-    document
-        .getElementById(
+    if (votingStarted || votingCompleted) {
+        showToast("Регистрация уже закрыта.");
+        return;
+    }
+
+    const section =
+        document.getElementById(
             "registrationSection"
-        )
-        .scrollIntoView({
-            behavior:
-                "smooth"
-        });
+        );
+
+    registrationOpen = true;
+    section.style.display = "block";
+
+    section.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+function closeRegistrationForm() {
+
+    const section =
+        document.getElementById(
+            "registrationSection"
+        );
+
+    registrationOpen = false;
+    section.style.display = "none";
 }
 
 
@@ -2055,6 +2097,27 @@ function updateSiteState() {
         document.getElementById("resultsSection");
 
     /*
+        Если база участников пустая, всегда показываем
+        форму регистрации.
+
+        Это также защищает от ситуации, когда после
+        очистки participants в contest_settings случайно
+        остался старый статус voting_completed = true.
+    */
+    if (participants.length === 0) {
+
+        registrationSection.style.display =
+            registrationOpen
+                ? "block"
+                : "none";
+
+        votingSection.style.display = "none";
+        resultsSection.style.display = "none";
+
+        return;
+    }
+
+    /*
         Результаты доступны ТОЛЬКО после
         явного завершения голосования админом.
     */
@@ -2070,6 +2133,7 @@ function updateSiteState() {
 
     /*
         Голосование идёт.
+        Регистрация уже закрыта.
         Результаты полностью скрыты.
     */
     if (votingStarted === true) {
@@ -2083,11 +2147,15 @@ function updateSiteState() {
     }
 
     /*
-        Регистрация открыта.
-        Результаты скрыты даже если в БД
-        случайно остались старые голоса.
+        Обычный режим регистрации.
+        Форма открывается только по кнопке
+        «Участвовать».
     */
-    registrationSection.style.display = "block";
+    registrationSection.style.display =
+        registrationOpen
+            ? "block"
+            : "none";
+
     votingSection.style.display = "none";
     resultsSection.style.display = "none";
 }
@@ -2400,6 +2468,8 @@ async function registerParticipant(event) {
         "Ты зарегистрирован! 🎉"
     );
 
+
+    closeRegistrationForm();
 
     await loadParticipants();
 }
