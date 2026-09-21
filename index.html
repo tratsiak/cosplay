@@ -3700,14 +3700,14 @@ async function renderResults() {
     */
     if (!voteRows || voteRows.length === 0) {
 
-        podium.innerHTML = `
-            <div
-                class="empty"
-                style="grid-column:1/-1"
-            >
-                Пока нет ни одного голоса.
-            </div>
-        `;
+        const resultsSection =
+            document.getElementById("resultsSection");
+
+        if (resultsSection) {
+            resultsSection.style.display = "none";
+        }
+
+        return;
 
     } else {
 
@@ -3741,14 +3741,14 @@ async function renderResults() {
 
         if (!top.length) {
 
-            podium.innerHTML = `
-                <div
-                    class="empty"
-                    style="grid-column:1/-1"
-                >
-                    Пока нет ни одного голоса.
-                </div>
-            `;
+            const resultsSection =
+                document.getElementById("resultsSection");
+
+            if (resultsSection) {
+                resultsSection.style.display = "none";
+            }
+
+            return;
 
         } else {
 
@@ -3840,8 +3840,12 @@ async function renderResults() {
 
         console.error(egorError);
 
-        egorPercent.textContent =
-            "Нет данных";
+        const egorSection =
+            egorPercent?.closest(".egor-result, .egor-card, .egor-section");
+
+        if (egorSection) {
+            egorSection.style.display = "none";
+        }
 
         return;
     }
@@ -3849,10 +3853,21 @@ async function renderResults() {
     const total =
         egorRows?.length || 0;
 
+    const egorSection =
+        egorPercent?.closest(".egor-result, .egor-card, .egor-section");
+
+    if (total > 0 && egorSection) {
+        egorSection.style.display = "";
+    }
+
     if (total === 0) {
 
-        egorPercent.textContent =
-            "Нет голосов";
+        const egorSection =
+            egorPercent?.closest(".egor-result, .egor-card, .egor-section");
+
+        if (egorSection) {
+            egorSection.style.display = "none";
+        }
 
         return;
     }
