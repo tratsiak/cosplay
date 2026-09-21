@@ -3490,6 +3490,80 @@ function selectEgor(
                     SUBMIT VOTE
 ===================================================== */
 
+function formatSupabaseError(error) {
+
+    if (!error) {
+        return "неизвестная ошибка";
+    }
+
+    return [
+        error.message,
+        error.details,
+        error.hint,
+        error.code
+            ? `код: ${error.code}`
+            : ""
+    ]
+        .filter(Boolean)
+        .join(" | ");
+}
+
+
+function showVoteError(message) {
+
+    console.error(message);
+
+    showToast(message);
+
+    /*
+        Дополнительно показываем ошибку
+        прямо в блоке голосования, чтобы
+        её нельзя было пропустить.
+    */
+    const section =
+        document.getElementById(
+            "votingSection"
+        );
+
+    if (!section) {
+        return;
+    }
+
+    let box =
+        document.getElementById(
+            "voteErrorBox"
+        );
+
+    if (!box) {
+
+        box =
+            document.createElement(
+                "div"
+            );
+
+        box.id =
+            "voteErrorBox";
+
+        box.style.cssText = `
+            margin:20px 0;
+            padding:14px 16px;
+            border-radius:12px;
+            background:rgba(239,68,68,.12);
+            border:1px solid rgba(239,68,68,.35);
+            color:#fecaca;
+            font-size:14px;
+            line-height:1.5;
+            word-break:break-word;
+        `;
+
+        section.prepend(box);
+    }
+
+    box.textContent =
+        message;
+}
+
+
 async function submitVoting() {
 
 
@@ -3623,8 +3697,9 @@ async function submitVoting() {
             voteError
         );
 
-        showToast(
-            "Ошибка сохранения голосов."
+        showVoteError(
+            "Ошибка сохранения голосов: " +
+            formatSupabaseError(voteError)
         );
 
         return;
@@ -3636,7 +3711,10 @@ async function submitVoting() {
         ответ на вопрос Егора.
     */
 
-    await supabaseClient
+    const {
+        error:
+            deleteEgorError
+    } = await supabaseClient
 
         .from("egor_votes")
 
@@ -3648,7 +3726,25 @@ async function submitVoting() {
         );
 
 
+    if (deleteEgorError) {
+
+        console.error(
+            "EGOR DELETE ERROR:",
+            deleteEgorError
+        );
+
+        showVoteError(
+            "Ошибка удаления старого голоса за Егора: " +
+            formatSupabaseError(deleteEgorError)
+        );
+
+        return;
+    }
+
+
     const {
+        data:
+            egorData,
         error:
             egorError
     } = await supabaseClient
@@ -3663,21 +3759,31 @@ async function submitVoting() {
             yes:
                 selectedEgor
 
-        });
+        })
+
+        .select();
 
 
     if (egorError) {
 
         console.error(
+            "EGOR INSERT ERROR:",
             egorError
         );
 
-        showToast(
-            "Голос за Егора не сохранился."
+        showVoteError(
+            "Ошибка сохранения голоса за Егора: " +
+            formatSupabaseError(egorError)
         );
 
         return;
     }
+
+
+    console.log(
+        "EGOR VOTE SAVED:",
+        egorData
+    );
 
 
     /*
