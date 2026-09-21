@@ -87,7 +87,6 @@
             margin: 0 auto;
         }
 
-
         /* HEADER */
 
         header {
@@ -151,7 +150,6 @@
             background:
                 rgba(255,255,255,.04);
         }
-
 
         /* HERO */
 
@@ -217,7 +215,6 @@
             line-height: 1.6;
         }
 
-
         /* BUTTONS */
 
         .btn {
@@ -279,7 +276,6 @@
                 rgba(239,68,68,.2);
         }
 
-
         /* SECTIONS */
 
         section {
@@ -317,7 +313,6 @@
                 0 20px 50px
                 rgba(0,0,0,.15);
         }
-
 
         /* REGISTRATION */
 
@@ -419,7 +414,6 @@
             margin-top: 20px;
         }
 
-
         /* PARTICIPANTS */
 
         .participants-grid {
@@ -464,7 +458,6 @@
 
             font-size: 13px;
         }
-
 
         /* VOTING */
 
@@ -622,7 +615,6 @@
             margin: 30px 0;
         }
 
-
         /* EGOR */
 
         .egor-card {
@@ -666,7 +658,6 @@
 
             font-weight: 900;
         }
-
 
         /* RESULTS */
 
@@ -781,7 +772,6 @@
             color: transparent;
         }
 
-
         /* ADMIN */
 
         .admin-panel {
@@ -870,7 +860,6 @@
             color: #ddd;
         }
 
-
         /* MODAL */
 
         .modal {
@@ -914,7 +903,6 @@
 
             border-radius: 20px;
         }
-
 
         /* TOAST */
 
@@ -962,7 +950,6 @@
                 var(--muted);
         }
 
-
         /* MOBILE */
 
         @media(max-width:800px) {
@@ -995,349 +982,324 @@
             }
         }
 
-
         @media (max-width: 560px) {
 
-    * {
-        max-width: 100%;
-    }
-
-    html,
-    body {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-    }
-
-    .container {
-        width: 100%;
-        max-width: 100%;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-
-    .hero {
-        padding: 45px 10px 25px;
-    }
-
-    h1 {
-        font-size: 46px;
-        letter-spacing: -2px;
-        word-break: normal;
-    }
-
-    .hero p {
-        font-size: 15px;
-        padding: 0 5px;
-    }
-
-    .card {
-        width: 100%;
-        max-width: 100%;
-        padding: 16px;
-        overflow: hidden;
-    }
-
-    /* Форма */
-
-    .registration {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .form-grid {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        gap: 14px;
-    }
-
-    .field,
-    .full {
-        width: 100%;
-        min-width: 0;
-    }
-
-    .field input,
-    input[type="text"] {
-        display: block;
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        height: 48px;
-        padding: 12px;
-        box-sizing: border-box;
-    }
-
-    /* Загрузка фотографии */
-
-    .upload {
-        width: 100%;
-        max-width: 100%;
-        padding: 20px 10px;
-        overflow: hidden;
-    }
-
-    .upload input[type="file"] {
-        display: block;
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        margin-top: 12px;
-        font-size: 13px;
-        overflow: hidden;
-    }
-
-    input,
-    button,
-    select,
-    textarea {
-        max-width: 100%;
-    }
-
-    .preview {
-        max-width: 150px;
-    }
-
-    .form-actions {
-        width: 100%;
-    }
-
-    .form-actions .btn {
-        width: 100%;
-    }
-
-    /* Участники */
-
-    .participants-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-        width: 100%;
-    }
-
-    .participant {
-        min-width: 0;
-        width: 100%;
-    }
-
-    .participant img {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .participant-info {
-        padding: 10px;
-        overflow: hidden;
-    }
-
-    .participant-name {
-        font-size: 14px;
-        overflow-wrap: anywhere;
-    }
-
-    .participant-character {
-        font-size: 12px;
-        overflow-wrap: anywhere;
-    }
-
-    /* Голосование */
-
-    .voting-list {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-        width: 100%;
-    }
-
-    .vote-card {
-        min-width: 0;
-        width: 100%;
-        overflow: hidden;
-    }
-
-    .vote-card img {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .vote-card-content {
-        padding: 8px;
-    }
-
-    .vote-name {
-        font-size: 13px;
-        overflow-wrap: anywhere;
-    }
-
-    .points {
-        width: 100%;
-        gap: 3px;
-    }
-
-    .point {
-        min-width: 0;
-        padding: 8px 2px;
-        font-size: 12px;
-    }
-
-    /* Вопрос */
-
-    .question {
-        width: 100%;
-        max-width: 100%;
-        overflow: hidden;
-    }
-
-    .question-header {
-        gap: 10px;
-    }
-
-    .question-title {
-        font-size: 16px;
-        line-height: 1.3;
-    }
-
-    .question-hint {
-        font-size: 12px;
-    }
-
-    /* Егор */
-
-    .egor-card {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .egor-title {
-        font-size: 27px;
-    }
-
-    .egor-buttons {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        gap: 10px;
-    }
-
-    .egor-btn {
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-    }
-
-    /* Результаты */
-
-    .podium {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        max-width: 100%;
-        gap: 10px;
-    }
-
-    .place {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .place.first {
-        order: -1;
-    }
-
-    .egor-result {
-        width: 100%;
-        max-width: 100%;
-        padding: 25px 15px;
-    }
-
-    .egor-percent {
-        font-size: 55px;
-    }
-
-    /* Админка */
-
-    .admin-top {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        width: 100%;
-    }
-
-    .admin-buttons {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .admin-buttons .btn {
-        width: 100%;
-    }
-
-    .admin-user {
-        width: 100%;
-        min-width: 0;
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .admin-user-left {
-        min-width: 0;
-        max-width: 100%;
-    }
-
-    .admin-user-left > div {
-        min-width: 0;
-        overflow-wrap: anywhere;
-    }
-
-    .admin-checkbox {
-        width: 100%;
-    }
-
-    /* Кнопки */
-
-    .btn {
-        max-width: 100%;
-        white-space: normal;
-    }
-
-    /* Модальное окно */
-
-    .modal {
-        padding: 10px;
-    }
-
-    .modal-card {
-        width: 100%;
-        max-width: 100%;
-        padding: 20px;
-    }
-
-    .modal-card input {
-        width: 100% !important;
-        max-width: 100% !important;
-        box-sizing: border-box;
-    }
-
-    /* Заголовки */
-
-    .section-title {
-        font-size: 25px;
-    }
-
-    .section-subtitle {
-        font-size: 14px;
-    }
-}
+            * {
+                max-width: 100%;
+            }
+
+            html,
+            body {
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            .container {
+                width: 100%;
+                max-width: 100%;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .hero {
+                padding: 45px 10px 25px;
+            }
+
+            h1 {
+                font-size: 46px;
+                letter-spacing: -2px;
+                word-break: normal;
+            }
+
+            .hero p {
+                font-size: 15px;
+                padding: 0 5px;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 100%;
+                padding: 16px;
+                overflow: hidden;
+            }
+
+            .registration {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .form-grid {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                gap: 14px;
+            }
+
+            .field,
+            .full {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .field input,
+            input[type="text"] {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+                height: 48px;
+                padding: 12px;
+                box-sizing: border-box;
+            }
+
+            .upload {
+                width: 100%;
+                max-width: 100%;
+                padding: 20px 10px;
+                overflow: hidden;
+            }
+
+            .upload input[type="file"] {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+                margin-top: 12px;
+                font-size: 13px;
+                overflow: hidden;
+            }
+
+            input,
+            button,
+            select,
+            textarea {
+                max-width: 100%;
+            }
+
+            .preview {
+                max-width: 150px;
+            }
+
+            .form-actions {
+                width: 100%;
+            }
+
+            .form-actions .btn {
+                width: 100%;
+            }
+
+            .participants-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+                width: 100%;
+            }
+
+            .participant {
+                min-width: 0;
+                width: 100%;
+            }
+
+            .participant img {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .participant-info {
+                padding: 10px;
+                overflow: hidden;
+            }
+
+            .participant-name {
+                font-size: 14px;
+                overflow-wrap: anywhere;
+            }
+
+            .participant-character {
+                font-size: 12px;
+                overflow-wrap: anywhere;
+            }
+
+            .voting-list {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+                width: 100%;
+            }
+
+            .vote-card {
+                min-width: 0;
+                width: 100%;
+                overflow: hidden;
+            }
+
+            .vote-card img {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .vote-card-content {
+                padding: 8px;
+            }
+
+            .vote-name {
+                font-size: 13px;
+                overflow-wrap: anywhere;
+            }
+
+            .points {
+                width: 100%;
+                gap: 3px;
+            }
+
+            .point {
+                min-width: 0;
+                padding: 8px 2px;
+                font-size: 12px;
+            }
+
+            .question {
+                width: 100%;
+                max-width: 100%;
+                overflow: hidden;
+            }
+
+            .question-header {
+                gap: 10px;
+            }
+
+            .question-title {
+                font-size: 16px;
+                line-height: 1.3;
+            }
+
+            .question-hint {
+                font-size: 12px;
+            }
+
+            .egor-card {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .egor-title {
+                font-size: 27px;
+            }
+
+            .egor-buttons {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+            }
+
+            .egor-btn {
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+            }
+
+            .podium {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                max-width: 100%;
+                gap: 10px;
+            }
+
+            .place {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .place.first {
+                order: -1;
+            }
+
+            .egor-result {
+                width: 100%;
+                max-width: 100%;
+                padding: 25px 15px;
+            }
+
+            .egor-percent {
+                font-size: 55px;
+            }
+
+            .admin-top {
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+            }
+
+            .admin-buttons {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .admin-buttons .btn {
+                width: 100%;
+            }
+
+            .admin-user {
+                width: 100%;
+                min-width: 0;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .admin-user-left {
+                min-width: 0;
+                max-width: 100%;
+            }
+
+            .admin-user-left > div {
+                min-width: 0;
+                overflow-wrap: anywhere;
+            }
+
+            .admin-checkbox {
+                width: 100%;
+            }
+
+            .btn {
+                max-width: 100%;
+                white-space: normal;
+            }
+
+            .modal {
+                padding: 10px;
+            }
+
+            .modal-card {
+                width: 100%;
+                max-width: 100%;
+                padding: 20px;
+            }
+
+            .modal-card input {
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box;
+            }
+
+            .section-title {
+                font-size: 25px;
+            }
+
+            .section-subtitle {
+                font-size: 14px;
+            }
+        }
 
     </style>
 
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -1358,9 +1320,7 @@
 
 </header>
 
-
 <main>
-
 
     <!-- HERO -->
 
@@ -1401,7 +1361,6 @@
 
     </section>
 
-
     <!-- REGISTRATION -->
 
     <section
@@ -1412,2832 +1371,4 @@
         <div class="container">
 
             <div
-                class="registration card"
-            >
-
-                <h2 class="section-title">
-                    Регистрация участника
-                </h2>
-
-                <p class="section-subtitle">
-                    Представь себя и покажи
-                    свой образ.
-                </p>
-
-
-                <form
-                    id="registrationForm"
-                >
-
-                    <div class="form-grid">
-
-
-                        <div class="field">
-
-                            <label>
-                                Имя
-                            </label>
-
-                            <input
-                                type="text"
-                                id="firstName"
-                                placeholder="Например, Егор"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="field">
-
-                            <label>
-                                Фамилия
-                            </label>
-
-                            <input
-                                type="text"
-                                id="lastName"
-                                placeholder="Например, Иванов"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="field full">
-
-                            <label>
-                                Персонаж
-                            </label>
-
-                            <input
-                                type="text"
-                                id="character"
-                                placeholder="Кого ты косплеишь?"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="field full">
-
-                            <label>
-                                Фотография косплея
-                            </label>
-
-                            <div class="upload">
-
-                                📸
-
-                                <div>
-                                    Выбери фотографию
-                                </div>
-
-                                <input
-                                    type="file"
-                                    id="photo"
-                                    accept="image/jpeg,image/png,image/webp"
-                                    required
-                                >
-
-                                <img
-                                    id="preview"
-                                    class="preview"
-                                >
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div
-                        class="form-actions"
-                        style="
-                            justify-content:space-between;
-                            gap:10px;
-                            flex-wrap:wrap;
-                        "
-                    >
-
-                        <button
-                            class="btn btn-secondary"
-                            type="button"
-                            onclick="closeRegistrationForm()"
-                        >
-                            Закрыть
-                        </button>
-
-                        <button
-                            class="btn btn-primary"
-                            type="submit"
-                        >
-                            Зарегистрироваться
-                        </button>
-
-                    </div>
-
-                </form>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- PARTICIPANTS -->
-
-    <section>
-
-        <div class="container">
-
-            <h2 class="section-title">
-                Участники
-            </h2>
-
-            <p class="section-subtitle">
-                Зарегистрированные участники
-            </p>
-
-            <div
-                id="participantsGrid"
-                class="participants-grid"
-            ></div>
-
-        </div>
-
-    </section>
-
-
-    <!-- VOTING -->
-
-    <section
-        id="votingSection"
-        style="display:none"
-    >
-
-        <div class="container">
-
-            <h2 class="section-title">
-                Голосование
-            </h2>
-
-            <p class="section-subtitle">
-                В каждом вопросе распредели
-                <b>3, 2 и 1 балл</b>.
-            </p>
-
-            <div
-                id="questionsContainer"
-            ></div>
-
-            <div class="vote-submit">
-
-                <button
-                    class="btn btn-primary"
-                    onclick="submitVoting()"
-                >
-                    Отдать голос
-                </button>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- RESULTS -->
-
-    <section
-        id="resultsSection"
-        style="display:none"
-    >
-
-        <div class="container">
-
-            <div style="text-align:center">
-
-                <div class="hero-badge">
-                    ✦ РЕЗУЛЬТАТЫ
-                </div>
-
-                <h2 class="section-title">
-                    Победители
-                </h2>
-
-                <p class="section-subtitle">
-                    Итоговые результаты
-                </p>
-
-            </div>
-
-
-            <div
-                id="podium"
-                class="podium"
-            ></div>
-
-
-            <div class="egor-result">
-
-                <div style="font-size:40px">
-                    😏
-                </div>
-
-                <h2>
-                    И последний вопрос...
-                </h2>
-
-                <div
-                    id="egorPercent"
-                    class="egor-percent"
-                >
-                    Нет голосов
-                </div>
-
-                <p style="color:var(--muted)">
-                    гостей считают Егора секси
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ADMIN -->
-
-    <section
-        id="adminSection"
-        class="admin-panel"
-    >
-
-        <div class="container">
-
-            <div class="card">
-
-                <div class="admin-top">
-
-                    <div>
-
-                        <h2 class="section-title">
-                            Админ-панель
-                        </h2>
-
-                        <p class="section-subtitle">
-                            Управление COSPLAY PARTY
-                        </p>
-
-                    </div>
-
-
-                    <div class="admin-buttons">
-
-                        <button
-                            id="startVotingButton"
-                            class="btn btn-primary"
-                            onclick="startVoting()"
-                        >
-                            🚀 Начать голосование
-                        </button>
-
-                        <button
-                            id="finishVotingButton"
-                            class="btn btn-danger"
-                            onclick="finishVoting()"
-                        >
-                            🏁 Завершить голосование
-                        </button>
-
-                        <button
-                            class="btn btn-danger"
-                            type="button"
-                            onclick="resetContest()"
-                            style="margin-left:8px;"
-                        >
-                            🗑 Очистить БД
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <div
-                    id="adminStatus"
-                ></div>
-
-
-                <h3>
-                    Участники
-                </h3>
-
-                <div
-                    id="adminList"
-                    class="admin-list"
-                ></div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-</main>
-
-
-<!-- ADMIN MODAL -->
-
-<div
-    id="adminModal"
-    class="modal"
->
-
-    <div class="modal-card">
-
-        <h2>
-            🔐 Администратор
-        </h2>
-
-        <p style="color:var(--muted)">
-            Введи пароль.
-        </p>
-
-        <input
-            id="adminPassword"
-            type="password"
-            placeholder="Пароль"
-            style="
-                width:100%;
-                padding:13px;
-                background:#0e0e17;
-                border:1px solid var(--border);
-                border-radius:10px;
-                color:white;
-            "
-        >
-
-        <div
-            style="
-                display:flex;
-                gap:10px;
-                margin-top:15px;
-            "
-        >
-
-            <button
-                class="btn btn-secondary"
-                onclick="closeAdminLogin()"
-            >
-                Отмена
-            </button>
-
-            <button
-                class="btn btn-primary"
-                onclick="loginAdmin()"
-            >
-                Войти
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<div
-    id="toast"
-    class="toast"
-></div>
-
-
-<script>
-
-
-/* =====================================================
-                    SUPABASE
-===================================================== */
-
-const SUPABASE_URL =
-    "https://rynnuupebhbffhvqjbqd.supabase.co";
-
-
-const SUPABASE_KEY =
-    "sb_publishable_PxIVdZZV8POwGl5RUFvrFg_96FfhktI";
-
-
-/*
-    Supabase Storage bucket for cosplay photos.
-*/
-const PHOTO_BUCKET =
-    "cosplay";
-
-
-const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
-
-
-/* =====================================================
-                    ADMIN
-===================================================== */
-
-const ADMIN_PASSWORD =
-    "cosplay2026";
-
-
-/* =====================================================
-                    STATE
-===================================================== */
-
-let participants = [];
-
-let votingStarted = false;
-
-let votingCompleted = false;
-
-let selectedVotes = {};
-
-let selectedEgor = null;
-
-let isAdmin = false;
-
-/*
-    Форма регистрации открывается только
-    после нажатия кнопки «Участвовать».
-*/
-let registrationOpen = false;
-
-
-/*
-    У каждого браузера будет
-    свой идентификатор голосующего.
-
-    Он НЕ является аккаунтом.
-*/
-
-let voterId =
-    localStorage.getItem(
-        "cosplay_voter_id"
-    );
-
-
-if (!voterId) {
-
-    voterId =
-        crypto.randomUUID();
-
-    localStorage.setItem(
-        "cosplay_voter_id",
-        voterId
-    );
-}
-
-
-/* =====================================================
-                    TOAST
-===================================================== */
-
-function showToast(message) {
-
-    const toast =
-        document.getElementById(
-            "toast"
-        );
-
-    toast.textContent =
-        message;
-
-    toast.classList.add(
-        "show"
-    );
-
-    setTimeout(
-        () => {
-
-            toast.classList.remove(
-                "show"
-            );
-
-        },
-        3000
-    );
-}
-
-
-/* =====================================================
-                    HTML ESCAPE
-===================================================== */
-
-function escapeHTML(value) {
-
-    return String(value)
-
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
-}
-
-
-/* =====================================================
-                    SCROLL
-===================================================== */
-
-function scrollToRegistration() {
-
-    if (votingStarted || votingCompleted) {
-        showToast("Регистрация уже закрыта.");
-        return;
-    }
-
-    const section =
-        document.getElementById(
-            "registrationSection"
-        );
-
-    registrationOpen = !registrationOpen;
-
-    section.style.display =
-        registrationOpen
-            ? "block"
-            : "none";
-
-    if (registrationOpen) {
-        section.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-    }
-}
-
-function closeRegistrationForm() {
-
-    const section =
-        document.getElementById(
-            "registrationSection"
-        );
-
-    registrationOpen = false;
-    section.style.display = "none";
-}
-
-
-/* =====================================================
-                    LOAD PARTICIPANTS
-===================================================== */
-
-async function loadParticipants() {
-
-    const {
-        data,
-        error
-    } = await supabaseClient
-
-        .from("participants")
-
-        .select("*")
-
-        .order(
-            "created_at",
-            {
-                ascending: true
-            }
-        );
-
-
-    if (error) {
-
-        console.error(error);
-
-        showToast(
-            "Не удалось загрузить участников."
-        );
-
-        return;
-    }
-
-
-    participants =
-        data || [];
-
-
-    renderParticipants();
-
-    if (isAdmin) {
-        renderAdmin();
-    }
-}
-
-
-/* =====================================================
-                    LOAD SETTINGS
-===================================================== */
-
-async function loadSettings() {
-
-    const {
-        data,
-        error
-    } = await supabaseClient
-
-        .from(
-            "contest_settings"
-        )
-
-        .select("*")
-
-        .eq(
-            "id",
-            1
-        )
-
-        .single();
-
-
-    if (error) {
-
-        console.error(error);
-
-        return;
-    }
-
-
-    votingStarted =
-        data.voting_started;
-
-    votingCompleted =
-        data.voting_completed;
-
-
-    updateSiteState();
-}
-
-
-/* =====================================================
-                    SITE STATE
-===================================================== */
-
-function updateSiteState() {
-
-    const registrationSection =
-        document.getElementById("registrationSection");
-
-    const votingSection =
-        document.getElementById("votingSection");
-
-    const resultsSection =
-        document.getElementById("resultsSection");
-
-    /*
-        Если база участников пустая, всегда показываем
-        форму регистрации.
-
-        Это также защищает от ситуации, когда после
-        очистки participants в contest_settings случайно
-        остался старый статус voting_completed = true.
-    */
-    if (participants.length === 0) {
-
-        registrationSection.style.display =
-            registrationOpen
-                ? "block"
-                : "none";
-
-        votingSection.style.display = "none";
-        resultsSection.style.display = "none";
-
-        return;
-    }
-
-    /*
-        Результаты доступны ТОЛЬКО после
-        явного завершения голосования админом.
-    */
-    if (votingCompleted === true) {
-
-        registrationOpen = false;
-        registrationSection.style.display = "none";
-        votingSection.style.display = "none";
-        resultsSection.style.display = "block";
-
-        renderResults();
-        return;
-    }
-
-    /*
-        Голосование идёт.
-        Регистрация уже закрыта.
-        Результаты полностью скрыты.
-    */
-    if (votingStarted === true) {
-
-        registrationOpen = false;
-        registrationSection.style.display = "none";
-        votingSection.style.display = "block";
-        resultsSection.style.display = "none";
-
-        renderVoting();
-        return;
-    }
-
-    /*
-        Обычный режим регистрации.
-        Форма открывается только по кнопке
-        «Участвовать».
-    */
-    registrationSection.style.display =
-        registrationOpen
-            ? "block"
-            : "none";
-
-    votingSection.style.display = "none";
-    resultsSection.style.display = "none";
-}
-
-/* =====================================================
-                    PHOTO PREVIEW
-===================================================== */
-
-document
-    .getElementById(
-        "photo"
-    )
-    .addEventListener(
-        "change",
-        event => {
-
-            const file =
-                event.target.files[0];
-
-            if (!file) {
-                return;
-            }
-
-
-            const reader =
-                new FileReader();
-
-
-            reader.onload =
-                event => {
-
-                    const preview =
-                        document
-                            .getElementById(
-                                "preview"
-                            );
-
-                    preview.src =
-                        event.target.result;
-
-                    preview.style.display =
-                        "block";
-                };
-
-
-            reader.readAsDataURL(
-                file
-            );
-        }
-    );
-
-
-/* =====================================================
-                    REGISTER
-===================================================== */
-
-document
-    .getElementById(
-        "registrationForm"
-    )
-    .addEventListener(
-        "submit",
-        registerParticipant
-    );
-
-
-async function registerParticipant(event) {
-
-    event.preventDefault();
-
-
-    if (
-        votingStarted ||
-        votingCompleted
-    ) {
-
-        showToast(
-            "Регистрация закрыта."
-        );
-
-        return;
-    }
-
-
-    const firstName =
-        document
-            .getElementById(
-                "firstName"
-            )
-            .value
-            .trim();
-
-
-    const lastName =
-        document
-            .getElementById(
-                "lastName"
-            )
-            .value
-            .trim();
-
-
-    const character =
-        document
-            .getElementById(
-                "character"
-            )
-            .value
-            .trim();
-
-
-    const file =
-        document
-            .getElementById(
-                "photo"
-            )
-            .files[0];
-
-
-    if (!file) {
-
-        showToast(
-            "Загрузи фотографию."
-        );
-
-        return;
-    }
-
-
-    /*
-        Разрешаем только JPG / PNG / WEBP.
-    */
-    const allowedTypes = [
-        "image/jpeg",
-        "image/png",
-        "image/webp"
-    ];
-
-    if (!allowedTypes.includes(file.type)) {
-        showToast(
-            "Можно загрузить только JPG, PNG или WEBP."
-        );
-        return;
-    }
-
-    /*
-        Ограничение размера.
-    */
-
-    if (
-        file.size >
-        6 * 1024 * 1024
-    ){
-
-        showToast(
-            "Фото должно быть меньше 6 МБ."
-        );
-
-        return;
-    }
-
-
-    showToast(
-        "Загружаем фотографию..."
-    );
-
-
-    /*
-        Уникальное имя файла.
-    */
-
-    const extension =
-        file.name
-            .split(".")
-            .pop()
-            .toLowerCase();
-
-
-    const filePath =
-        `${crypto.randomUUID()}.${extension}`;
-
-
-    /*
-        Upload в Supabase Storage.
-    */
-
-    const {
-        error:
-            uploadError
-    } = await supabaseClient
-
-        .storage
-
-        .from(PHOTO_BUCKET)
-
-        .upload(
-            filePath,
-            file,
-            {
-                cacheControl:
-                    "3600",
-
-                contentType:
-                    file.type,
-
-                upsert:
-                    false
-            }
-        );
-
-
-    if (uploadError) {
-
-        console.error(
-            uploadError
-        );
-
-        showToast(
-            "Ошибка загрузки: " +
-            (uploadError.message || "проверь Storage policy.")
-        );
-
-        return;
-    }
-
-
-    /*
-        Получаем публичную ссылку.
-    */
-
-    const {
-        data:
-            publicData
-    } =
-        supabaseClient
-
-            .storage
-
-            .from(PHOTO_BUCKET)
-
-            .getPublicUrl(
-                filePath
-            );
-
-
-    const photoUrl =
-        publicData.publicUrl;
-
-
-    /*
-        Создаём участника.
-    */
-
-    const {
-        error:
-            insertError
-    } = await supabaseClient
-
-        .from(
-            "participants"
-        )
-
-        .insert({
-
-            first_name:
-                firstName,
-
-            last_name:
-                lastName,
-
-            character_name:
-                character,
-
-            photo_url:
-                photoUrl
-
-        });
-
-
-    if (insertError) {
-
-        console.error(
-            insertError
-        );
-
-        showToast(
-            "Ошибка регистрации."
-        );
-
-        return;
-    }
-
-
-    document
-        .getElementById(
-            "registrationForm"
-        )
-        .reset();
-
-
-    document
-        .getElementById(
-            "preview"
-        )
-        .style.display =
-            "none";
-
-
-    showToast(
-        "Ты зарегистрирован! 🎉"
-    );
-
-    closeRegistrationForm();
-
-    await loadParticipants();
-
-    updateSiteState();
-}
-
-
-/* =====================================================
-                    RENDER PARTICIPANTS
-===================================================== */
-
-function renderParticipants() {
-
-    const container =
-        document
-            .getElementById(
-                "participantsGrid"
-            );
-
-
-    if (!participants.length) {
-
-        container.innerHTML = `
-
-            <div
-                class="card empty"
-                style="grid-column:1/-1"
-            >
-                Пока никто не зарегистрировался.
-            </div>
-
-        `;
-
-        return;
-    }
-
-
-    container.innerHTML =
-        participants
-            .map(
-                p => `
-
-                    <div
-                        class="participant card"
-                    >
-
-                        <img
-                            src="${escapeHTML(
-                                p.photo_url
-                            )}"
-                        >
-
-                        <div
-                            class="participant-info"
-                        >
-
-                            <div
-                                class="participant-name"
-                            >
-                                ${escapeHTML(
-                                    p.first_name
-                                )}
-                                ${escapeHTML(
-                                    p.last_name
-                                )}
-                            </div>
-
-                            <div
-                                class="participant-character"
-                            >
-                                ${escapeHTML(
-                                    p.character_name
-                                )}
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                `
-            )
-            .join("");
-}
-
-
-/* =====================================================
-                    ADMIN LOGIN
-===================================================== */
-
-function openAdminLogin() {
-
-    document
-        .getElementById(
-            "adminModal"
-        )
-        .classList
-        .add("active");
-}
-
-
-function closeAdminLogin() {
-
-    document
-        .getElementById(
-            "adminModal"
-        )
-        .classList
-        .remove("active");
-}
-
-
-function loginAdmin() {
-
-    const password =
-        document
-            .getElementById(
-                "adminPassword"
-            )
-            .value;
-
-
-    if (
-        password !==
-        ADMIN_PASSWORD
-    ) {
-
-        showToast(
-            "Неверный пароль."
-        );
-
-        return;
-    }
-
-
-    isAdmin = true;
-
-    closeAdminLogin();
-
-
-    document
-        .getElementById(
-            "adminSection"
-        )
-        .classList
-        .add("active");
-
-
-    renderAdmin();
-
-
-    document
-        .getElementById(
-            "adminSection"
-        )
-        .scrollIntoView({
-            behavior:
-                "smooth"
-        });
-}
-
-
-/* =====================================================
-                    ADMIN
-===================================================== */
-
-function renderAdmin() {
-
-    if (!isAdmin) {
-        return;
-    }
-
-
-    const status =
-        document
-            .getElementById(
-                "adminStatus"
-            );
-
-
-    const list =
-        document
-            .getElementById(
-                "adminList"
-            );
-
-
-    const startButton =
-        document
-            .getElementById(
-                "startVotingButton"
-            );
-
-
-    const finishButton =
-        document
-            .getElementById(
-                "finishVotingButton"
-            );
-
-
-    let statusText;
-
-
-    if (votingCompleted) {
-
-        statusText =
-            "🏆 Голосование завершено";
-
-    } else if (votingStarted) {
-
-        statusText =
-            "🟢 Голосование идёт";
-
-    } else {
-
-        statusText =
-            "🟡 Регистрация открыта";
-    }
-
-
-    status.innerHTML = `
-
-        <div class="card">
-
-            <b>Статус:</b>
-            ${statusText}
-
-            <br><br>
-
-            Всего участников:
-            <b>
-                ${participants.length}
-            </b>
-
-            <br>
-
-            Участвуют:
-            <b>
-                ${
-                    participants.filter(
-                        p =>
-                            !p.excluded
-                    ).length
-                }
-            </b>
-
-        </div>
-
-    `;
-
-
-    startButton.disabled =
-        votingStarted ||
-        votingCompleted ||
-        participants.filter(
-            p =>
-                !p.excluded
-        ).length < 3;
-
-
-    finishButton.disabled =
-        !votingStarted &&
-        !votingCompleted;
-
-    if (votingCompleted) {
-        finishButton.disabled = false;
-        finishButton.textContent =
-            "🏆 Показать результаты";
-    } else {
-        finishButton.textContent =
-            "🏁 Завершить голосование";
-    }
-
-
-    if (!participants.length) {
-
-        list.innerHTML = `
-
-            <div class="empty">
-                Пока нет участников.
-            </div>
-
-        `;
-
-        return;
-    }
-
-
-    list.innerHTML =
-        participants
-            .map(
-                p => `
-
-                    <div
-                        class="admin-user"
-                        style="
-                            opacity:
-                                ${
-                                    p.excluded
-                                    ? ".4"
-                                    : "1"
-                                };
-                        "
-                    >
-
-                        <div
-                            class="admin-user-left"
-                        >
-
-                            <img
-                                src="${escapeHTML(
-                                    p.photo_url
-                                )}"
-                            >
-
-                            <div>
-
-                                <b>
-                                    ${escapeHTML(
-                                        p.first_name
-                                    )}
-                                    ${escapeHTML(
-                                        p.last_name
-                                    )}
-                                </b>
-
-                                <div
-                                    style="
-                                    color:var(--muted);
-                                    font-size:13px;
-                                    margin-top:4px;
-                                    "
-                                >
-                                    ${escapeHTML(
-                                        p.character_name
-                                    )}
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <label
-                            class="admin-checkbox"
-                        >
-
-                            <input
-                                type="checkbox"
-
-                                ${
-                                    p.excluded
-                                    ? "checked"
-                                    : ""
-                                }
-
-                                ${
-                                    votingStarted ||
-                                    votingCompleted
-                                    ? "disabled"
-                                    : ""
-                                }
-
-                                onchange="
-                                    toggleExcluded(
-                                        '${p.id}',
-                                        this.checked
-                                    )
-                                "
-                            >
-
-                            Не участвует
-
-                        </label>
-
-                    </div>
-
-                `
-            )
-            .join("");
-}
-
-
-/* =====================================================
-                    EXCLUDE
-===================================================== */
-
-async function toggleExcluded(
-    id,
-    excluded
-) {
-
-    if (
-        votingStarted ||
-        votingCompleted
-    ) {
-        return;
-    }
-
-
-    const {
-        error
-    } = await supabaseClient
-
-        .from(
-            "participants"
-        )
-
-        .update({
-            excluded:
-                excluded
-        })
-
-        .eq(
-            "id",
-            id
-        );
-
-
-    if (error) {
-
-        console.error(error);
-
-        showToast(
-            "Не удалось изменить участника."
-        );
-
-        return;
-    }
-
-
-    await loadParticipants();
-}
-
-
-/* =====================================================
-                    START VOTING
-===================================================== */
-
-async function resetContest() {
-
-    const confirmed =
-        confirm(
-            "ТОЧНО очистить весь конкурс?\n\n" +
-            "Будут удалены все участники и все голоса, " +
-            "а голосование будет полностью сброшено."
-        );
-
-    if (!confirmed) {
-        return;
-    }
-
-    try {
-
-        const {
-            error
-        } = await supabaseClient
-            .rpc("reset_contest");
-
-        if (error) {
-
-            console.error(
-                "RESET CONTEST ERROR:",
-                error
-            );
-
-            showVoteError(
-                "Ошибка очистки БД: " +
-                formatSupabaseError(error)
-            );
-
-            return;
-        }
-
-        /*
-            Полностью перечитываем данные из Supabase,
-            а не полагаемся на локальный массив.
-        */
-        participants = [];
-        votingStarted = false;
-        votingCompleted = false;
-        selectedVotes = {};
-        selectedEgor = null;
-        registrationOpen = false;
-
-        await loadParticipants();
-        await loadSettings();
-
-        document
-            .getElementById("registrationSection")
-            .style.display = "none";
-
-        document
-            .getElementById("votingSection")
-            .style.display = "none";
-
-        document
-            .getElementById("resultsSection")
-            .style.display = "none";
-
-        renderAdmin();
-
-        showToast(
-            "Конкурс полностью сброшен."
-        );
-
-    } catch (error) {
-
-        console.error(
-            "RESET CONTEST ERROR:",
-            error
-        );
-
-        showVoteError(
-            "Ошибка очистки БД: " +
-            formatSupabaseError(error)
-        );
-    }
-}
-
-
-/* =====================================================
-                    FINISH VOTING
-===================================================== */
-
-async function finishVoting() {
-
-    /*
-        Если голосование уже завершено, повторное нажатие
-        не является ошибкой — просто снова показываем результаты.
-    */
-    if (votingCompleted === true) {
-
-        document
-            .getElementById("resultsSection")
-            .style.display = "block";
-
-        await renderResults();
-        renderAdmin();
-
-        document
-            .getElementById("resultsSection")
-            .scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
-        return;
-    }
-
-
-    if (!votingStarted) {
-
-        showToast(
-            "Сначала нужно начать голосование."
-        );
-
-        return;
-    }
-
-
-    if (
-        !confirm(
-            "Завершить голосование и показать результаты всем?"
-        )
-    ) {
-        return;
-    }
-
-
-    const {
-        error
-    } = await supabaseClient
-
-        .from("contest_settings")
-
-        .update({
-
-            voting_started: false,
-
-            voting_completed: true
-
-        })
-
-        .eq("id", 1);
-
-
-    if (error) {
-
-        console.error(
-            "FINISH VOTING ERROR:",
-            error
-        );
-
-        showToast(
-            "Не удалось завершить голосование: " +
-            formatSupabaseError(error)
-        );
-
-        return;
-    }
-
-
-    /*
-        Сначала меняем локальное состояние.
-        Это важно: renderResults() проверяет
-        votingCompleted.
-    */
-    votingStarted = false;
-    votingCompleted = true;
-    registrationOpen = false;
-
-    /*
-        Повторно читаем состояние из Supabase.
-        Это защищает от рассинхронизации между
-        локальным состоянием и БД.
-    */
-    await loadSettings();
-
-    votingStarted = false;
-    votingCompleted = true;
-    registrationOpen = false;
-
-
-    /*
-        Показываем результаты только после
-        подтверждения voting_completed = true.
-    */
-    const resultsSection =
-        document.getElementById(
-            "resultsSection"
-        );
-
-    const votingSection =
-        document.getElementById(
-            "votingSection"
-        );
-
-    const registrationSection =
-        document.getElementById(
-            "registrationSection"
-        );
-
-    registrationSection.style.display = "none";
-    votingSection.style.display = "none";
-    resultsSection.style.display = "block";
-
-
-    /*
-        Обновляем админку и сами результаты.
-    */
-    renderAdmin();
-
-    await renderResults();
-
-
-    showToast(
-        "Голосование завершено! 🏆"
-    );
-
-
-    resultsSection.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-}
-
-
-/* =====================================================
-                    QUESTIONS
-===================================================== */
-
-const questions = [
-
-    "Чей по вашему мнению образ похож на оригинального персонажа?",
-
-    "Чей костюм по вашему мнению выполнен круто и качественно?",
-
-    "Чей по вашему мнению косплей производит вау-эффект?"
-
-];
-
-
-function renderVoting() {
-
-    const container =
-        document
-            .getElementById(
-                "questionsContainer"
-            );
-
-
-    const active =
-        participants.filter(
-            p =>
-                !p.excluded
-        );
-
-
-    container.innerHTML =
-        questions
-            .map(
-                (
-                    question,
-                    questionIndex
-                ) => `
-
-                    <div
-                        class="question card"
-                        data-question="${questionIndex}"
-                    >
-
-                        <div
-                            class="question-header"
-                        >
-
-                            <div
-                                class="question-number"
-                            >
-                                ${questionIndex + 1}
-                            </div>
-
-                            <div>
-
-                                <div
-                                    class="question-title"
-                                >
-                                    ${question}
-                                </div>
-
-                                <div
-                                    class="question-hint"
-                                >
-                                    Выбери одного
-                                    участника на
-                                    3, одного на
-                                    2 и одного на
-                                    1 балл.
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <div
-                            class="voting-list"
-                        >
-
-                            ${
-                                active
-                                    .map(
-                                        p => `
-
-                                            <div
-                                                class="vote-card"
-                                                data-user="${p.id}"
-                                            >
-
-                                                <img
-                                                    src="${escapeHTML(
-                                                        p.photo_url
-                                                    )}"
-                                                >
-
-                                                <div
-                                                    class="vote-card-content"
-                                                >
-
-                                                    <div
-                                                        class="vote-name"
-                                                    >
-                                                        ${escapeHTML(
-                                                            p.first_name
-                                                        )}
-                                                        ${escapeHTML(
-                                                            p.last_name
-                                                        )}
-                                                    </div>
-
-
-                                                    <div
-                                                        class="points"
-                                                    >
-
-                                                        <button
-                                                            class="point"
-                                                            data-points="3"
-                                                            onclick="
-                                                                selectPoints(
-                                                                    ${questionIndex},
-                                                                    '${p.id}',
-                                                                    3
-                                                                )
-                                                            "
-                                                        >
-                                                            3
-                                                        </button>
-
-
-                                                        <button
-                                                            class="point"
-                                                            data-points="2"
-                                                            onclick="
-                                                                selectPoints(
-                                                                    ${questionIndex},
-                                                                    '${p.id}',
-                                                                    2
-                                                                )
-                                                            "
-                                                        >
-                                                            2
-                                                        </button>
-
-
-                                                        <button
-                                                            class="point"
-                                                            data-points="1"
-                                                            onclick="
-                                                                selectPoints(
-                                                                    ${questionIndex},
-                                                                    '${p.id}',
-                                                                    1
-                                                                )
-                                                            "
-                                                        >
-                                                            1
-                                                        </button>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                        `
-                                    )
-                                    .join("")
-                            }
-
-                        </div>
-
-                    </div>
-
-                `
-            )
-            .join("")
-        +
-        `
-
-            <div
-                class="question card egor-card"
-            >
-
-                <div
-                    class="question-number"
-                    style="margin:auto"
-                >
-                    4
-                </div>
-
-                <h2 class="egor-title">
-                    Считаете ли Егора секси?
-                </h2>
-
-                <p style="color:var(--muted)">
-                    Этот вопрос не влияет
-                    на общий результат.
-                </p>
-
-
-                <div
-                    class="egor-buttons"
-                >
-
-                    <button
-                        class="egor-btn"
-                        onclick="
-                            selectEgor(
-                                true,
-                                this
-                            )
-                        "
-                    >
-                        😏 Конечно
-                    </button>
-
-
-                    <button
-                        class="egor-btn"
-                        onclick="
-                            selectEgor(
-                                false,
-                                this
-                            )
-                        "
-                    >
-                        🤔 Есть сомнения
-                    </button>
-
-                </div>
-
-            </div>
-
-        `;
-}
-
-
-/* =====================================================
-                    SELECT POINTS
-===================================================== */
-
-function selectPoints(
-    question,
-    participantId,
-    points
-) {
-
-    if (
-        !selectedVotes[question]
-    ) {
-
-        selectedVotes[question] =
-            {};
-    }
-
-
-    /*
-        Если этот участник
-        уже имел другой балл —
-        убираем его.
-    */
-
-    delete selectedVotes[question]
-        [participantId];
-
-
-    /*
-        Если этот балл уже
-        был у другого —
-        убираем старый выбор.
-    */
-
-    Object
-        .entries(
-            selectedVotes[question]
-        )
-        .forEach(
-            ([id, value]) => {
-
-                if (
-                    value ===
-                    points
-                ) {
-
-                    delete selectedVotes[
-                        question
-                    ][id];
-                }
-            }
-        );
-
-
-    selectedVotes[question]
-        [participantId] =
-            points;
-
-
-    updateVoteVisual(
-        question
-    );
-}
-
-
-/* =====================================================
-                    UPDATE VOTE UI
-===================================================== */
-
-function updateVoteVisual(
-    question
-) {
-
-    const questionElement =
-        document.querySelector(
-            `.question[data-question="${question}"]`
-        );
-
-
-    questionElement
-        .querySelectorAll(
-            ".point"
-        )
-        .forEach(
-            button => {
-
-                button.classList
-                    .remove(
-                        "selected"
-                    );
-            }
-        );
-
-
-    Object
-        .entries(
-            selectedVotes[question] ||
-            {}
-        )
-        .forEach(
-            ([id, points]) => {
-
-                const card =
-                    questionElement
-                        .querySelector(
-                            `[data-user="${id}"]`
-                        );
-
-
-                if (!card) {
-                    return;
-                }
-
-
-                const button =
-                    card.querySelector(
-                        `[data-points="${points}"]`
-                    );
-
-
-                if (button) {
-
-                    button.classList
-                        .add(
-                            "selected"
-                        );
-                }
-            }
-        );
-}
-
-
-/* =====================================================
-                    EGOR
-===================================================== */
-
-function selectEgor(
-    value,
-    button
-) {
-
-    selectedEgor =
-        value;
-
-
-    document
-        .querySelectorAll(
-            ".egor-btn"
-        )
-        .forEach(
-            b => {
-
-                b.style.background =
-                    "rgba(255,255,255,.05)";
-            }
-        );
-
-
-    button.style.background =
-        "linear-gradient(135deg,#8b5cf6,#ec4899)";
-}
-
-
-/* =====================================================
-                    SUBMIT VOTE
-===================================================== */
-
-function formatSupabaseError(error) {
-
-    if (!error) {
-        return "неизвестная ошибка";
-    }
-
-    return [
-        error.message,
-        error.details,
-        error.hint,
-        error.code
-            ? `код: ${error.code}`
-            : ""
-    ]
-        .filter(Boolean)
-        .join(" | ");
-}
-
-
-function showVoteError(message) {
-
-    console.error(message);
-
-    showToast(message);
-
-    /*
-        Дополнительно показываем ошибку
-        прямо в блоке голосования, чтобы
-        её нельзя было пропустить.
-    */
-    const section =
-        document.getElementById(
-            "votingSection"
-        );
-
-    if (!section) {
-        return;
-    }
-
-    let box =
-        document.getElementById(
-            "voteErrorBox"
-        );
-
-    if (!box) {
-
-        box =
-            document.createElement(
-                "div"
-            );
-
-        box.id =
-            "voteErrorBox";
-
-        box.style.cssText = `
-            margin:20px 0;
-            padding:14px 16px;
-            border-radius:12px;
-            background:rgba(239,68,68,.12);
-            border:1px solid rgba(239,68,68,.35);
-            color:#fecaca;
-            font-size:14px;
-            line-height:1.5;
-            word-break:break-word;
-        `;
-
-        section.prepend(box);
-    }
-
-    box.textContent =
-        message;
-}
-
-
-async function submitVoting() {
-
-
-    /*
-        Проверяем вопросы.
-    */
-
-    for (
-        let q = 0;
-        q < 3;
-        q++
-    ) {
-
-        if (
-            !selectedVotes[q] ||
-            Object.keys(
-                selectedVotes[q]
-            ).length !== 3
-        ) {
-
-            showToast(
-                `В вопросе №${q + 1} выбери 3, 2 и 1 балл.`
-            );
-
-            return;
-        }
-    }
-
-
-    if (
-        selectedEgor === null
-    ) {
-
-        showToast(
-            "Ответь на вопрос про Егора 😏"
-        );
-
-        return;
-    }
-
-
-    /*
-        Удаляем старый голос
-        этого браузера,
-        если он существует.
-    */
-
-    const {
-        error:
-            deleteError
-    } = await supabaseClient
-
-        .from("votes")
-
-        .delete()
-
-        .eq(
-            "voter_id",
-            voterId
-        );
-
-
-    if (deleteError) {
-
-        console.error(
-            deleteError
-        );
-
-        showToast(
-            "Ошибка отправки голоса."
-        );
-
-        return;
-    }
-
-
-    /*
-        Создаём новые голоса.
-    */
-
-    const rows = [];
-
-
-    for (
-        let q = 0;
-        q < 3;
-        q++
-    ) {
-
-        Object
-            .entries(
-                selectedVotes[q]
-            )
-            .forEach(
-                ([participantId, points]) => {
-
-                    rows.push({
-
-                        voter_id:
-                            voterId,
-
-                        question:
-                            q + 1,
-
-                        participant_id:
-                            participantId,
-
-                        points:
-                            points
-
-                    });
-
-                }
-            );
-    }
-
-
-    const {
-        error:
-            voteError
-    } = await supabaseClient
-
-        .from("votes")
-
-        .insert(rows);
-
-
-    if (voteError) {
-
-        console.error(
-            voteError
-        );
-
-        showVoteError(
-            "Ошибка сохранения голосов: " +
-            formatSupabaseError(voteError)
-        );
-
-        return;
-    }
-
-
-    /*
-        Удаляем предыдущий
-        ответ на вопрос Егора.
-    */
-
-    const {
-        error:
-            deleteEgorError
-    } = await supabaseClient
-
-        .from("egor_votes")
-
-        .delete()
-
-        .eq(
-            "voter_id",
-            voterId
-        );
-
-
-    if (deleteEgorError) {
-
-        console.error(
-            "EGOR DELETE ERROR:",
-            deleteEgorError
-        );
-
-        showVoteError(
-            "Ошибка удаления старого голоса за Егора: " +
-            formatSupabaseError(deleteEgorError)
-        );
-
-        return;
-    }
-
-
-    const {
-        data:
-            egorData,
-        error:
-            egorError
-    } = await supabaseClient
-
-        .from("egor_votes")
-
-        .insert({
-
-            voter_id:
-                voterId,
-
-            yes:
-                selectedEgor
-
-        })
-
-        .select();
-
-
-    if (egorError) {
-
-        console.error(
-            "EGOR INSERT ERROR:",
-            egorError
-        );
-
-        showVoteError(
-            "Ошибка сохранения голоса за Егора: " +
-            formatSupabaseError(egorError)
-        );
-
-        return;
-    }
-
-
-    console.log(
-        "EGOR VOTE SAVED:",
-        egorData
-    );
-
-
-    /*
-        Не показываем результаты!
-    */
-
-    document
-        .getElementById(
-            "votingSection"
-        )
-        .innerHTML = `
-
-            <div
-                class="card"
-                style="
-                    text-align:center;
-                    padding:60px 25px;
-                "
-            >
-
-                <div
-                    style="font-size:60px"
-                >
-                    🎉
-                </div>
-
-                <h2>
-                    Голос принят!
-                </h2>
-
-                <p
-                    style="color:var(--muted)"
-                >
-                    Спасибо за участие.
-                    Результаты будут объявлены
-                    после завершения голосования.
-                </p>
-
-            </div>
-
-        `;
-
-
-    showToast(
-        "Голос принят! 🎉"
-    );
-}
-
-
-/* =====================================================
-                    RESULTS
-===================================================== */
-
-async function renderResults() {
-
-    const podium =
-        document.getElementById("podium");
-
-    const egorPercent =
-        document.getElementById("egorPercent");
-
-    /*
-        Дополнительная защита:
-        результаты нельзя вызвать напрямую,
-        пока админ не завершил голосование.
-    */
-    if (!votingCompleted) {
-
-        document.getElementById(
-            "resultsSection"
-        ).style.display = "none";
-
-        return;
-    }
-
-    /*
-        Загружаем только реальные голоса.
-    */
-    const {
-        data: voteRows,
-        error
-    } = await supabaseClient
-        .from("votes")
-        .select("participant_id, points");
-
-    if (error) {
-
-        console.error(error);
-
-        const resultsSection =
-            document.getElementById("resultsSection");
-
-        if (resultsSection) {
-            resultsSection.style.display = "block";
-        }
-
-        podium.innerHTML = `
-            <div
-                class="empty"
-                style="grid-column:1/-1"
-            >
-                Не удалось загрузить результаты.
-                <br>
-                <small>${escapeHTML(
-                    formatSupabaseError(error)
-                )}</small>
-            </div>
-        `;
-
-        return;
-    }
-
-    /*
-        Если голосов вообще нет —
-        не создаём фальшивый рейтинг
-        из участников с 0 баллов.
-    */
-    if (!voteRows || voteRows.length === 0) {
-
-        const resultsSection =
-            document.getElementById("resultsSection");
-
-        if (resultsSection) {
-            resultsSection.style.display = "none";
-        }
-
-        return;
-
-    } else {
-
-        const scores = {};
-
-        voteRows.forEach(vote => {
-
-            if (!scores[vote.participant_id]) {
-                scores[vote.participant_id] = 0;
-            }
-
-            scores[vote.participant_id] +=
-                Number(vote.points) || 0;
-        });
-
-        /*
-            В рейтинг попадают только участники,
-            которые реально получили хотя бы 1 балл.
-        */
-        const ranked =
-            participants
-                .filter(p => !p.excluded)
-                .filter(p => scores[p.id] > 0)
-                .map(p => ({
-                    ...p,
-                    score: scores[p.id]
-                }))
-                .sort((a, b) => b.score - a.score);
-
-        const top = ranked.slice(0, 3);
-
-        if (!top.length) {
-
-            const resultsSection =
-                document.getElementById("resultsSection");
-
-            if (resultsSection) {
-                resultsSection.style.display = "none";
-            }
-
-            return;
-
-        } else {
-
-            const ordered = [
-                top[1],
-                top[0],
-                top[2]
-            ].filter(Boolean);
-
-            podium.innerHTML =
-                ordered
-                    .map(p => {
-
-                        const place =
-                            p.id === top[0]?.id
-                                ? 1
-                                : p.id === top[1]?.id
-                                    ? 2
-                                    : 3;
-
-                        return `
-                            <div
-                                class="
-                                    place
-                                    ${
-                                        place === 1
-                                            ? "first"
-                                            : ""
-                                    }
-                                "
-                            >
-                                <div
-                                    class="place-medal"
-                                >
-                                    ${
-                                        place === 1
-                                            ? "🥇"
-                                            : place === 2
-                                                ? "🥈"
-                                                : "🥉"
-                                    }
-                                </div>
-
-                                <img
-                                    src="${escapeHTML(
-                                        p.photo_url
-                                    )}"
-                                >
-
-                                <div
-                                    class="place-name"
-                                >
-                                    ${escapeHTML(
-                                        p.first_name
-                                    )}
-                                    ${escapeHTML(
-                                        p.last_name
-                                    )}
-                                </div>
-
-                                <div
-                                    class="place-score"
-                                >
-                                    ${p.score}
-                                    баллов
-                                </div>
-                            </div>
-                        `;
-                    })
-                    .join("");
-        }
-    }
-
-    /*
-        ЕГОР
-
-        Если ответов нет вообще —
-        не показываем 0%, а честно говорим,
-        что голосов пока нет.
-    */
-    const {
-        data: egorRows,
-        error: egorError
-    } = await supabaseClient
-        .from("egor_votes")
-        .select("yes");
-
-    if (egorError) {
-
-        console.error(egorError);
-
-        const egorSection =
-            egorPercent?.closest(".egor-result, .egor-card, .egor-section");
-
-        if (egorSection) {
-            egorSection.style.display = "none";
-        }
-
-        return;
-    }
-
-    const total =
-        egorRows?.length || 0;
-
-    const egorSection =
-        egorPercent?.closest(".egor-result, .egor-card, .egor-section");
-
-    if (total > 0 && egorSection) {
-        egorSection.style.display = "";
-    }
-
-    if (total === 0) {
-
-        const egorSection =
-            egorPercent?.closest(".egor-result, .egor-card, .egor-section");
-
-        if (egorSection) {
-            egorSection.style.display = "none";
-        }
-
-        return;
-    }
-
-    const yes =
-        egorRows.filter(
-            row => row.yes === true
-        ).length;
-
-    const percent =
-        Math.round(
-            yes / total * 100
-        );
-
-    egorPercent.textContent =
-        `${percent}%`;
-}
-
-/* =====================================================
-                    REALTIME
-===================================================== */
-
-function setupRealtime() {
-
-    supabaseClient
-
-        .channel(
-            "cosplay-party"
-        )
-
-        .on(
-            "postgres_changes",
-            {
-                event: "*",
-                schema: "public",
-                table: "participants"
-            },
-            async () => {
-
-                await loadParticipants();
-
-            }
-        )
-
-        .on(
-            "postgres_changes",
-            {
-                event: "*",
-                schema: "public",
-                table: "contest_settings"
-            },
-            async () => {
-
-                await loadSettings();
-
-                if (
-                    isAdmin
-                ) {
-
-                    renderAdmin();
-                }
-
-            }
-        )
-
-        .subscribe();
-}
-
-
-/* =====================================================
-                    INITIALIZATION
-===================================================== */
-
-async function init() {
-
-    await loadParticipants();
-
-    await loadSettings();
-
-    setupRealtime();
-}
-
-
-init();
-
-
-</script>
-
-</body>
-
-</html>
+                class
