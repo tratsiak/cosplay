@@ -2754,7 +2754,17 @@ function renderAdmin() {
 
 
     finishButton.disabled =
-        !votingStarted;
+        !votingStarted &&
+        !votingCompleted;
+
+    if (votingCompleted) {
+        finishButton.disabled = false;
+        finishButton.textContent =
+            "🏆 Показать результаты";
+    } else {
+        finishButton.textContent =
+            "🏁 Завершить голосование";
+    }
 
 
     if (!participants.length) {
@@ -3136,10 +3146,34 @@ async function startVoting() {
 
 async function finishVoting() {
 
+    /*
+        Если голосование уже завершено, повторное нажатие
+        не является ошибкой — просто снова показываем результаты.
+    */
+    if (votingCompleted === true) {
+
+        document
+            .getElementById("resultsSection")
+            .style.display = "block";
+
+        await renderResults();
+        renderAdmin();
+
+        document
+            .getElementById("resultsSection")
+            .scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        return;
+    }
+
+
     if (!votingStarted) {
 
         showToast(
-            "Голосование ещё не началось."
+            "Сначала нужно начать голосование."
         );
 
         return;
@@ -3159,46 +3193,73 @@ async function finishVoting() {
         error
     } = await supabaseClient
 
-        .from(
-            "contest_settings"
-        )
+        .from("contest_settings")
 
         .update({
 
-            voting_started:
-                false,
+            voting_started: false,
 
-            voting_completed:
-                true
+            voting_completed: true
 
         })
 
-        .eq(
-            "id",
-            1
-        );
+        .eq("id", 1);
 
 
     if (error) {
 
-        console.error(error);
+        console.error(
+            "FINISH VOTING ERROR:",
+            error
+        );
 
         showToast(
-            "Не удалось завершить голосование."
+            "Не удалось завершить голосование: " +
+            formatSupabaseError(error)
         );
 
         return;
     }
 
 
-    votingStarted =
-        false;
+    /*
+        Сначала меняем локальное состояние.
+        Это важно: renderResults() проверяет
+        votingCompleted.
+    */
+    votingStarted = false;
+    votingCompleted = true;
+    registrationOpen = false;
 
-    votingCompleted =
-        true;
+
+    /*
+        Показываем результаты сразу, не полагаясь
+        на повторную загрузку settings.
+    */
+    const resultsSection =
+        document.getElementById(
+            "resultsSection"
+        );
+
+    const votingSection =
+        document.getElementById(
+            "votingSection"
+        );
+
+    const registrationSection =
+        document.getElementById(
+            "registrationSection"
+        );
+
+    registrationSection.style.display = "none";
+    votingSection.style.display = "none";
+    resultsSection.style.display = "block";
 
 
-    await loadSettings();
+    /*
+        Обновляем админку и сами результаты.
+    */
+    renderAdmin();
 
     await renderResults();
 
@@ -3208,14 +3269,10 @@ async function finishVoting() {
     );
 
 
-    document
-        .getElementById(
-            "resultsSection"
-        )
-        .scrollIntoView({
-            behavior:
-                "smooth"
-        });
+    resultsSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 }
 
 
