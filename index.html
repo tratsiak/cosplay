@@ -1824,6 +1824,13 @@ const SUPABASE_KEY =
     "sb_publishable_PxIVdZZV8POwGl5RUFvrFg_96FfhktI";
 
 
+/*
+    Supabase Storage bucket for cosplay photos.
+*/
+const PHOTO_BUCKET =
+    "cosplay";
+
+
 const supabaseClient =
     window.supabase.createClient(
         SUPABASE_URL,
@@ -1969,13 +1976,19 @@ function scrollToRegistration() {
             "registrationSection"
         );
 
-    registrationOpen = true;
-    section.style.display = "block";
+    registrationOpen = !registrationOpen;
 
-    section.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
+    section.style.display =
+        registrationOpen
+            ? "block"
+            : "none";
+
+    if (registrationOpen) {
+        section.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
 }
 
 function closeRegistrationForm() {
@@ -2123,6 +2136,7 @@ function updateSiteState() {
     */
     if (votingCompleted === true) {
 
+        registrationOpen = false;
         registrationSection.style.display = "none";
         votingSection.style.display = "none";
         resultsSection.style.display = "block";
@@ -2138,6 +2152,7 @@ function updateSiteState() {
     */
     if (votingStarted === true) {
 
+        registrationOpen = false;
         registrationSection.style.display = "none";
         votingSection.style.display = "block";
         resultsSection.style.display = "none";
@@ -2468,10 +2483,11 @@ async function registerParticipant(event) {
         "Ты зарегистрирован! 🎉"
     );
 
-
     closeRegistrationForm();
 
     await loadParticipants();
+
+    updateSiteState();
 }
 
 
